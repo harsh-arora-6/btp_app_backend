@@ -21,13 +21,13 @@ const cableSchema = mongoose.Schema({
     },
     rating:{
         type: Number,
-        float: true ,// or double: true for double precision
+        double: true ,// or double: true for double precision
         required:true
     },
     point_locations:{
         type:[[Number,Number]],
         required:true,
-        float:true,
+        double:true,
         validate:[(val)=>{return val.length >= 2},'Wire should have atleast two points']
     },
     starting_location:{
@@ -40,6 +40,10 @@ const cableSchema = mongoose.Schema({
     },
     next_maintenance:{
         type:Date,
+        required:true
+    },
+    year_of_manufacture:{
+        type:Number,
         required:true
     }
 });

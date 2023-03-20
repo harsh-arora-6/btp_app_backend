@@ -1,10 +1,11 @@
+const substationModel = require('../models/substationModel');
 const transformerModel = require('../models/transformerModel')
 
 module.exports.getAllTransformers = async function getAlltransformers(req,res){
     try {
          let transformers = await transformerModel.find();
          res.json({
-             message:'Data fetched successfully',
+             message:'Task Successful',
              data:transformers
          })
     } catch (error) {
@@ -17,7 +18,7 @@ module.exports.getAllTransformers = async function getAlltransformers(req,res){
     try {
          let transformer = await transformerModel.findById(req.params.id);
          res.json({
-             message:'Data fetched successfully',
+             message:'Task Successful',
              data:transformer
          })
     } catch (error) {
@@ -30,8 +31,11 @@ module.exports.getAllTransformers = async function getAlltransformers(req,res){
     try {
         const transformerData = req.body;
         const newtransformer = await transformerModel.create(transformerData)
+        const substation = await substationModel.findOne({_id:newtransformer.substation});
+        substation.transformers.push(newtransformer._id);
+        await substation.save();
         res.status(200).json({
-            message:'Data Added successfully',
+            message:'Task Successful',
             data:newtransformer
         })
     } catch (error) {
@@ -57,7 +61,7 @@ module.exports.getAllTransformers = async function getAlltransformers(req,res){
             }
             let data = await transformer.save();
             res.json({
-                message:"Data updated successfully",
+                message:"Task Successful",
                 data:data
             })
         }else{
@@ -76,8 +80,11 @@ module.exports.getAllTransformers = async function getAlltransformers(req,res){
         const id = req.params.id;
 
         const deletedtransformer = await transformerModel.findByIdAndDelete(id);
+        let parentSubstation = await substationModel.findById(deletedtransformer.substation);
+        parentSubstation.transformers = parentSubstation.transformers.filter((transformer)=>transformer._id != deletedtransformer._id);
+        await parentSubstation.save();
         res.status(200).json({
-            message:'Data deleted successfully',
+            message:'Task Successful',
             data:deletedtransformer
         })
     } catch (error) {

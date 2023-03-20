@@ -23,10 +23,27 @@ const substationSchema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'transformerModel',
     }],
+    location:{
+        // type:[mongoose.Types.Double],
+        type:[Number],
+        double:true,
+    },
+    rmu:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'rmuModel'
+    },
+    lt_panel:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'ltpanelModel'
+    }
 });
 substationSchema.pre(/^find/,function(next){
-    this.populate('transformers');
+    this.populate('transformers').populate('rmu').populate('lt_panel');
     next();
 })
+// substationSchema.pre('save',function(next){
+//     this.populate('transformers');
+//     next();
+// })
 const substationModel = mongoose.model('substationModel',substationSchema);
 module.exports = substationModel;

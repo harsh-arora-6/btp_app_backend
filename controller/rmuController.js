@@ -1,11 +1,12 @@
-const cableModel = require('../models/cableModel')
+const rmuModel = require('../models/rmuModel');
+const substationModel = require('../models/substationModel');
 
-module.exports.getAllCables = async function getAllCables(req,res){
+module.exports.getAllRmus = async function getAllrmus(req,res){
     try {
-         let cables = await cableModel.find();
+         let rmus = await rmuModel.find();
          res.json({
              message:'Task Successful',
-             data:cables
+             data:rmus
          })
     } catch (error) {
          res.status(500).json({
@@ -13,12 +14,12 @@ module.exports.getAllCables = async function getAllCables(req,res){
          })
     }
  }
- module.exports.getCable = async function getCable(req,res){
+ module.exports.getRmu = async function getrmu(req,res){
     try {
-         let cable = await cableModel.findById(req.params.id);
+         let rmu = await rmuModel.findById(req.params.id);
          res.json({
              message:'Task Successful',
-             data:cable
+             data:rmu
          })
     } catch (error) {
          res.status(500).json({
@@ -26,13 +27,17 @@ module.exports.getAllCables = async function getAllCables(req,res){
          })
     }
  }
- module.exports.addNewCable = async function addNewCable(req,res){
+ module.exports.addNewRmu = async function addNewrmu(req,res){
     try {
-        const cableData = req.body;
-        const newCable = await cableModel.create(cableData)
+        const rmuData = req.body;
+        const newrmu = await rmuModel.create(rmuData);
+
+        const substation = await substationModel.findOne({_id:newrmu.substation});
+        substation.rmu = newrmu._id;
+        await substation.save();
         res.status(200).json({
             message:'Task Successful',
-            data:newCable
+            data:newrmu
         })
     } catch (error) {
         res.status(500).json({
@@ -40,21 +45,21 @@ module.exports.getAllCables = async function getAllCables(req,res){
         })
     }
  }
- module.exports.updateCable = async function updateCable(req,res){
+ module.exports.updateRmu = async function updatermu(req,res){
     try{
         let id = req.params.id;
-        let cable = await cableModel.findById(id);
+        let rmu = await rmuModel.findById(id);
         let keys = []
-        let cableToBeUpdated = req.body;
-        if(cable){
+        let rmuToBeUpdated = req.body;
+        if(rmu){
             
-            for(let key in cableToBeUpdated){
+            for(let key in rmuToBeUpdated){
                 keys.push(key);
             }
             for(let i = 0;i < keys.length;i++){
-                cable[keys[i]] = cableToBeUpdated[keys[i]];
+                rmu[keys[i]] = rmuToBeUpdated[keys[i]];
             }
-            let data = await cable.save();
+            let data = await rmu.save();
             res.json({
                 message:"Task Successful",
                 data:data
@@ -70,14 +75,14 @@ module.exports.getAllCables = async function getAllCables(req,res){
         })
     }
  }
- module.exports.deleteCable = async function deleteCable(req,res){
+ module.exports.deleteRmu = async function deletermu(req,res){
     try {
         const id = req.params.id;
 
-        const deletedCable = await cableModel.findByIdAndDelete(id);
+        const deletedrmu = await rmuModel.findByIdAndDelete(id);
         res.status(200).json({
             message:'Task Successful',
-            data:deletedCable
+            data:deletedrmu
         })
     } catch (error) {
         res.status(500).json({

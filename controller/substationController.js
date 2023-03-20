@@ -1,10 +1,13 @@
-const substationModel = require('../models/substationModel')
+const ltpanelModel = require('../models/ltpanelModel');
+const rmuModel = require('../models/rmuModel');
+const substationModel = require('../models/substationModel');
+const transformerModel = require('../models/transformerModel');
 
 module.exports.getAllSubstations = async function getAllSubstations(req,res){
     try {
          let substations = await substationModel.find();
          res.json({
-             message:'Data fetched successfully',
+             message:'Task Successful',
              data:substations
          })
     } catch (error) {
@@ -18,7 +21,7 @@ module.exports.getAllSubstations = async function getAllSubstations(req,res){
         const substationData = req.body;
         const newsubstation = await substationModel.create(substationData)
         res.status(200).json({
-            message:'Data Added successfully',
+            message:'Task Successful',
             data:newsubstation
         })
     } catch (error) {
@@ -31,7 +34,7 @@ module.exports.getAllSubstations = async function getAllSubstations(req,res){
     try {
          let substation = await substationModel.findById(req.params.id);
          res.json({
-             message:'Data fetched successfully',
+             message:'Task Successful',
              data:substation
          })
     } catch (error) {
@@ -56,7 +59,7 @@ module.exports.getAllSubstations = async function getAllSubstations(req,res){
             }
             let data = await substation.save();
             res.json({
-                message:"Data updated successfully",
+                message:"Task Successful",
                 data:data
             })
         }else{
@@ -75,8 +78,23 @@ module.exports.getAllSubstations = async function getAllSubstations(req,res){
         const id = req.params.id;
 
         const deletedsubstation = await substationModel.findByIdAndDelete(id);
+        const transformers = deletedsubstation.transformers;
+        // delete all the transformers present in deleted substation
+        if(transformers && transformers.length)
+            transformers.forEach(async element => {
+                await transformerModel.findByIdAndDelete(element._id)
+            });
+        let rmu = deletedsubstation.rmu;
+        let lt_panel = deletedsubstation.lt_panel;
+        // If rmu present , delete it
+        if(rmu){
+            await rmuModel.findByIdAndDelete(rmu._id)
+        }
+        if(lt_panel){
+            await ltpanelModel.findByIdAndDelete(lt_panel._id)
+        }
         res.status(200).json({
-            message:'Data deleted successfully',
+            message:'Task Successful',
             data:deletedsubstation
         })
     } catch (error) {
