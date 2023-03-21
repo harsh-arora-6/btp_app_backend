@@ -23,11 +23,17 @@ const ltpanelSchema = mongoose.Schema({
     incomer_rated_current:{
         type:Number,
         double:true,
+        set: (value) => {
+            return value.toFixed(2);
+        },
         required:true
     },
     outgoer_rated_current:{
         type:Number,
         double:true,
+        set: (value) => {
+            return value.toFixed(2);
+        },
         required:true
     },
     substation:{

@@ -29,7 +29,10 @@ module.exports.getAllCables = async function getAllCables(req,res){
  module.exports.addNewCable = async function addNewCable(req,res){
     try {
         const cableData = req.body;
-        const newCable = await cableModel.create(cableData)
+        let newCable = await cableModel.create(cableData)
+        // newCable.point_locations.map((point_location) => point_location.map((point)=> point.toFixed(8)));
+        // await newCable.save();
+        // console.log(newCable);
         res.status(200).json({
             message:'Task Successful',
             data:newCable

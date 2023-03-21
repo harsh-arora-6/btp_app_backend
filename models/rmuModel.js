@@ -18,6 +18,9 @@ const rmuSchema = mongoose.Schema({
     },
     circuit_breaker_rating:{
         type:Number,
+        set: (value) => {
+            return value.toFixed(2);
+        },
         required:true
     },
     substation:{

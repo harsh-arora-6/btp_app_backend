@@ -1,7 +1,8 @@
-const { default: mongoose } = require("mongoose");
+const { default: mongoose, mongo } = require("mongoose");
 const emailValidator = require('email-validator');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
+const mongooseDouble = require("mongoose-double");
 
 // connecting database using mongoose
 const db_link = 'mongodb+srv://harsh_arora:7OBkLcwXLUbInIc0@cluster0.jfh4zpi.mongodb.net/?retryWrites=true&w=majority';// harsh_arora : <password> 
@@ -25,9 +26,8 @@ const cableSchema = mongoose.Schema({
         required:true
     },
     point_locations:{
-        type:[[Number,Number]],
+        type:[[Number]],
         required:true,
-        double:true,
         validate:[(val)=>{return val.length >= 2},'Wire should have atleast two points']
     },
     starting_location:{
@@ -47,5 +47,9 @@ const cableSchema = mongoose.Schema({
         required:true
     }
 });
+cableSchema.pre('save',function(next){
+    this.rating = this.rating.toFixed(2);
+    next()
+})
 const cableModel = mongoose.model('cableModel',cableSchema);
 module.exports = cableModel;

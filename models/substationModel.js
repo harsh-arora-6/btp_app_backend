@@ -26,6 +26,9 @@ const substationSchema = mongoose.Schema({
     location:{
         // type:[mongoose.Types.Double],
         type:[Number],
+        set: (values) => {
+            return values.map((value) => value.toFixed(8));
+        },
         double:true,
     },
     rmu:{
