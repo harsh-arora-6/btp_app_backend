@@ -1,9 +1,9 @@
 const substationModel = require('../models/substationModel');
 const transformerModel = require('../models/transformerModel')
 
-module.exports.getAllTransformers = async function getAlltransformers(req,res){
+module.exports.getAllSubstationTransformers = async function getAllSustationTransformers(req,res){
     try {
-         let transformers = await transformerModel.find();
+         let transformers = await transformerModel.find({"substation":req.params.substationId});
          res.json({
              message:'Task Successful',
              data:transformers

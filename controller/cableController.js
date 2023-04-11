@@ -2,6 +2,7 @@ const cableModel = require('../models/cableModel')
 
 module.exports.getAllCables = async function getAllCables(req,res){
     try {
+        // console.log('req received in all cables');
          let cables = await cableModel.find();
          res.json({
              message:'Task Successful',

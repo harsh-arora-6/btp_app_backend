@@ -12,29 +12,32 @@ mongoose.connect(db_link)
 })
 //creating a schema
 const ltpanelSchema = mongoose.Schema({
-    incomers:{
-        type:Number,
-        required:true
-    },
-    outgoers:{
-        type:Number,
-        required:true
-    },
-    incomer_rated_current:{
-        type:Number,
-        double:true,
-        set: (value) => {
-            return value.toFixed(2);
-        },
-        required:true
-    },
-    outgoer_rated_current:{
-        type:Number,
-        double:true,
-        set: (value) => {
-            return value.toFixed(2);
-        },
-        required:true
+    // incomers:{
+    //     type:Number,
+    //     required:true
+    // },
+    // outgoers:{
+    //     type:Number,
+    //     required:true
+    // },
+    // incomer_rated_current:{
+    //     type:Number,
+    //     double:true,
+    //     set: (value) => {
+    //         return value.toFixed(2);
+    //     },
+    //     required:true
+    // },
+    // outgoer_rated_current:{
+    //     type:Number,
+    //     double:true,
+    //     set: (value) => {
+    //         return value.toFixed(2);
+    //     },
+    //     required:true
+    // },
+    properties:{
+        type:Object
     },
     substation:{
         type:mongoose.Schema.Types.ObjectId,

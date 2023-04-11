@@ -12,16 +12,19 @@ mongoose.connect(db_link)
 })
 //creating a schema
 const rmuSchema = mongoose.Schema({
-    way:{
-        type:Number,
-        required:true
-    },
-    circuit_breaker_rating:{
-        type:Number,
-        set: (value) => {
-            return value.toFixed(2);
-        },
-        required:true
+    // way:{
+    //     type:Number,
+    //     required:true
+    // },
+    // circuit_breaker_rating:{
+    //     type:Number,
+    //     set: (value) => {
+    //         return value.toFixed(2);
+    //     },
+    //     required:true
+    // },
+    properties:{
+        type:Object
     },
     substation:{
         type:mongoose.Schema.Types.ObjectId,

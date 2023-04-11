@@ -15,9 +15,8 @@ mongoose.connect(db_link)
 })
 //creating a schema
 const substationSchema = mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
+    properties:{
+        type:Object
     },
     transformers:[{
         type:mongoose.Schema.Types.ObjectId,

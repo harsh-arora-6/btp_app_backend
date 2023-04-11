@@ -1,10 +1,14 @@
 const express = require('express');
 const rmuRouter = express.Router();
-const {getAllRmus,addNewRmu,updateRmu,deleteRmu, getRmu} = require('../controller/rmuController.js')
+const {getAllRmus,getRmuBasedOnSubstationId,addNewRmu,updateRmu,deleteRmu, getRmu} = require('../controller/rmuController.js')
 
 rmuRouter
 .route('/')
 .get(getAllRmus)
+
+rmuRouter
+.route('/:substationId')
+.get(getRmuBasedOnSubstationId)
 
 rmuRouter.route('/creatermu')
 .post(addNewRmu)

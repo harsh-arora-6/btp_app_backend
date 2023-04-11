@@ -14,6 +14,20 @@ module.exports.getAllLtpanels = async function getAllltpanels(req,res){
          })
     }
  }
+ module.exports.getLtpanelBasedOnSubstation = async function getLtpanelBasedOnSubstation(req,res){
+    try {
+         let ltpanels = await ltpanelModel.find({"substation":req.params.substationId});
+         res.json({
+             message:'Task Successful',
+             data:ltpanels
+         })
+    } catch (error) {
+         res.status(500).json({
+             message:error.message
+         })
+    }
+ }
+ 
  module.exports.getLtpanel = async function getltpanel(req,res){
     try {
          let ltpanel = await ltpanelModel.findById(req.params.id);

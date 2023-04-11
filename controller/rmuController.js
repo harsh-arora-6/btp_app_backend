@@ -14,6 +14,19 @@ module.exports.getAllRmus = async function getAllrmus(req,res){
          })
     }
  }
+ module.exports.getRmuBasedOnSubstationId = async function getRmuBasedOnSubstationId(req,res){
+    try {
+         let rmus = await rmuModel.findOne({"substation":req.params.substationId});
+         res.json({
+             message:'Task Successful',
+             data:rmus
+         })
+    } catch (error) {
+         res.status(500).json({
+             message:error.message
+         })
+    }
+ }
  module.exports.getRmu = async function getrmu(req,res){
     try {
          let rmu = await rmuModel.findById(req.params.id);
@@ -77,9 +90,7 @@ module.exports.getAllRmus = async function getAllrmus(req,res){
  }
  module.exports.deleteRmu = async function deletermu(req,res){
     try {
-        const id = req.params.id;
-
-        const deletedrmu = await rmuModel.findByIdAndDelete(id);
+        const deletedrmu = await rmuModel.findByIdAndDelete(req.params.id);
         res.status(200).json({
             message:'Task Successful',
             data:deletedrmu

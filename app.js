@@ -13,13 +13,17 @@ const {sendMail} = require('./utility/nodemailer.js');
 
 
 const cookieParser = require('cookie-parser');
-
-app.listen(5000);
+const hostname = '127.0.0.1';
+const port = 5000;
+app.listen(port,hostname,()=>{
+    console.log(`Server is Running at http://${hostname}:${port}/`)
+});
 
 // middleware functions are those which run after request has been made and before response is sent.
 app.use(express.json()); // global middleware
 app.use(cookieParser());// to access cookies in req,res 
 // app.use(cors(corsOptions))
+app.use(cors());
 
 // mini app
 //base router to use
@@ -34,7 +38,7 @@ app.use('/transformers',transformerRouter);
 app.use('/substations',substationRouter);
 app.use('/rmus',rmuRouter);
 app.use('/ltpanels',ltpanelRouter);
-schedule.scheduleJob('0 0 * * 0', sendMail);
+// schedule.scheduleJob('0 0 * * 0', sendMail);
 // schedule.scheduleJob('* * * * *', sendMail);
 // schedule.scheduleJob('* * * * *', readData);
 // console.log(result);

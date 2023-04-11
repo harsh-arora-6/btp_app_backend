@@ -16,40 +16,43 @@ mongoose.connect(db_link)
 })
 //creating a schema
 const cableSchema = mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
+    properties:{
+        type:Object
     },
-    rating:{
-        type: Number,
-        double: true ,// or double: true for double precision
-        required:true
-    },
+    // name:{
+    //     type:String,
+    //     required:true,
+    // },
+    // rating:{
+    //     type: Number,
+    //     double: true ,// or double: true for double precision
+    //     required:true
+    // },
     point_locations:{
         type:[[Number]],
         required:true,
         validate:[(val)=>{return val.length >= 2},'Wire should have atleast two points']
     },
-    starting_location:{
-        type:String,
-        required:true
-    },
-    ending_location:{
-        type:String,
-        required:true
-    },
-    next_maintenance:{
-        type:Date,
-        required:true
-    },
-    year_of_manufacture:{
-        type:Number,
-        required:true
-    }
+    // starting_location:{
+    //     type:String,
+    //     required:true
+    // },
+    // ending_location:{
+    //     type:String,
+    //     required:true
+    // },
+    // next_maintenance:{
+    //     type:Date,
+    //     required:true
+    // },
+    // year_of_manufacture:{
+    //     type:Number,
+    //     required:true
+    // }
 });
-cableSchema.pre('save',function(next){
-    this.rating = this.rating.toFixed(2);
-    next()
-})
+// cableSchema.pre('save',function(next){
+//     this.rating = this.rating.toFixed(2);
+//     next()
+// })
 const cableModel = mongoose.model('cableModel',cableSchema);
 module.exports = cableModel;

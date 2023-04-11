@@ -14,37 +14,40 @@ mongoose.connect(db_link)
 })
 //creating a schema
 const transformerSchema = mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
-    },
-    rated_power:{
-        type:Number,
-        double:true,
-        required:true
-    },
-    impedance:{
-        type:Number,
-        double:true,
-        required:true
-    },
-    next_maintenance:{
-        type:Date,
-        required:true
-    },
-    rated_primary_voltage:{
-        type:Number,
-        double:true,
-        required:true
-    },
-    rated_secondary_voltage:{
-        type:Number,
-        double:true,
-        required:true
-    },
-    year_of_manufacture:{
-        type:Number,
-        required:true
+    // name:{
+    //     type:String,
+    //     required:true,
+    // },
+    // rated_power:{
+    //     type:Number,
+    //     double:true,
+    //     required:true
+    // },
+    // impedance:{
+    //     type:Number,
+    //     double:true,
+    //     required:true
+    // },
+    // next_maintenance:{
+    //     type:Date,
+    //     required:true
+    // },
+    // rated_primary_voltage:{
+    //     type:Number,
+    //     double:true,
+    //     required:true
+    // },
+    // rated_secondary_voltage:{
+    //     type:Number,
+    //     double:true,
+    //     required:true
+    // },
+    // year_of_manufacture:{
+    //     type:Number,
+    //     required:true
+    // },
+    properties:{
+        type:Object
     },
     substation:{
         type:mongoose.Schema.Types.ObjectId,
