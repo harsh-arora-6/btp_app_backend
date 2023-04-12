@@ -20,11 +20,13 @@ module.exports.getAllSubstations = async function getAllSubstations(req,res){
     try {
         const substationData = req.body;
         const newsubstation = await substationModel.create(substationData)
+        // console.log(newsubstation);
         res.status(200).json({
             message:'Task Successful',
             data:newsubstation
         })
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             message:error.message
         })
@@ -43,14 +45,13 @@ module.exports.getAllSubstations = async function getAllSubstations(req,res){
          })
     }
  }
- module.exports.updateSubstation = async function updatesubstation(req,res){
+ module.exports.updateSubstation = async function updateSubstation(req,res){
     try{
         let id = req.params.id;
         let substation = await substationModel.findById(id);
         let keys = []
         let substationToBeUpdated = req.body;
         if(substation){
-            
             for(let key in substationToBeUpdated){
                 keys.push(key);
             }
@@ -58,6 +59,8 @@ module.exports.getAllSubstations = async function getAllSubstations(req,res){
                 substation[keys[i]] = substationToBeUpdated[keys[i]];
             }
             let data = await substation.save();
+            // invoking find so that population takes place as we require in the front end
+            data = await substationModel.findById(id);
             res.json({
                 message:"Task Successful",
                 data:data
@@ -73,7 +76,7 @@ module.exports.getAllSubstations = async function getAllSubstations(req,res){
         })
     }
  }
- module.exports.deleteSubstation = async function deletesubstation(req,res){
+ module.exports.deleteSubstation = async function deleteSubstation(req,res){
     try {
         const id = req.params.id;
 

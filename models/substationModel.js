@@ -40,7 +40,9 @@ const substationSchema = mongoose.Schema({
     }
 });
 substationSchema.pre(/^find/,function(next){
-    this.populate('transformers').populate('rmu').populate('lt_panel');
+    this.populate('transformers');
+    this.populate('rmu');
+    this.populate('lt_panel');
     next();
 })
 // substationSchema.pre('save',function(next){
