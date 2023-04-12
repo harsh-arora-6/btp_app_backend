@@ -16,10 +16,10 @@ module.exports.getAllRmus = async function getAllrmus(req,res){
  }
  module.exports.getRmuBasedOnSubstationId = async function getRmuBasedOnSubstationId(req,res){
     try {
-         let rmus = await rmuModel.findOne({"substation":req.params.substationId});
+         let rmu = await rmuModel.findOne({"substation":req.params.substationId});
          res.json({
              message:'Task Successful',
-             data:rmus
+             data:rmu
          })
     } catch (error) {
          res.status(500).json({

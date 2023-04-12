@@ -16,10 +16,10 @@ module.exports.getAllLtpanels = async function getAllltpanels(req,res){
  }
  module.exports.getLtpanelBasedOnSubstation = async function getLtpanelBasedOnSubstation(req,res){
     try {
-         let ltpanels = await ltpanelModel.find({"substation":req.params.substationId});
+         let ltpanel = await ltpanelModel.findOne({"substation":req.params.substationId});
          res.json({
              message:'Task Successful',
-             data:ltpanels
+             data:ltpanel
          })
     } catch (error) {
          res.status(500).json({
