@@ -30,9 +30,12 @@ app.use(cors());
 const cableRouter = require('./Routes/cableRouter.js');
 const transformerRouter = require('./Routes/transformerRouter.js');
 const substationRouter = require('./Routes/substationRouter.js');
-const { updateData } = require("./utility/excel.js");
+// const { updateData } = require("./utility/excel.js");
 const rmuRouter = require("./Routes/rmuRouter.js");
 const ltpanelRouter = require("./Routes/ltpanelRouter.js");
+const userRouter = require('./Routes/userRouter');
+
+app.use('/user',userRouter);
 app.use('/cables',cableRouter);
 app.use('/transformers',transformerRouter);
 app.use('/substations',substationRouter);
