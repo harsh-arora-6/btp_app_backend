@@ -59,7 +59,7 @@ module.exports.login = async function login(req,res){
             }
         }else{
             return res.json({
-                message:'user not found'
+                message:'please sign up'
             })
         }
     } catch (error) {
