@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config();
 const app = express();
 const cors=require("cors");
 const schedule = require('node-schedule');
@@ -15,7 +16,8 @@ const {sendMail} = require('./utility/nodemailer.js');
 const cookieParser = require('cookie-parser');
 const hostname = '127.0.0.1';
 const port = 5000;
-app.listen(port,hostname,()=>{
+// console.log(process.env.PORT);
+app.listen(process.env.PORT||port,hostname,()=>{
     console.log(`Server is Running at http://${hostname}:${port}/`)
 });
 
