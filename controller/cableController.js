@@ -1,5 +1,5 @@
 const cableModel = require('../models/cableModel')
-
+const line_currents = require('../current_data');
 module.exports.getAllCables = async function getAllCables(req,res){
     try {
         // console.log('req received in all cables');
@@ -17,6 +17,17 @@ module.exports.getAllCables = async function getAllCables(req,res){
  module.exports.getCable = async function getCable(req,res){
     try {
          let cable = await cableModel.findById(req.params.id);
+        // send the current information to frontend.
+         if(cable.properties.code){
+            // add current magnitude in property
+            cable.properties.phaseA_current = line_currents['I1'][cable.properties.code];
+            cable.properties.phaseB_current = line_currents['I2'][cable.properties.code];
+            cable.properties.phaseC_current = line_currents['I3'][cable.properties.code]; 
+            // add current angle in property
+            cable.properties.phaseA_angle = line_currents['Angle1'][cable.properties.code];
+            cable.properties.phaseB_angle = line_currents['Angle2'][cable.properties.code];
+            cable.properties.phaseC_angle = line_currents['Angle3'][cable.properties.code];  
+         }
          res.json({
              message:'Task Successful',
              data:cable
