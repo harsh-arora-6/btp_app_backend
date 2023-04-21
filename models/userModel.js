@@ -1,6 +1,7 @@
 const { default: mongoose } = require("mongoose");
 const emailValidator = require('email-validator');
-const crypto = require('crypto');
+// const crypto = require('crypto');
+const otpGenerator = require('otp-generator');
 // connecting database using mongoose
 const db_link = 'mongodb+srv://harsh_arora:7OBkLcwXLUbInIc0@cluster0.jfh4zpi.mongodb.net/?retryWrites=true&w=majority';// harsh_arora : <password> 
 mongoose.connect(db_link)
@@ -46,8 +47,11 @@ const userSchema = mongoose.Schema({
     resetToken:String
 });
 userSchema.methods.generateResetToken = function(){
+
+    // Generate a 6-digit OTP
+    const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false });
     // use crypto
-    let resetToken = crypto.randomBytes(32).toString('hex');
+    let resetToken = otp
     this.resetToken = resetToken;
     // console.log("reset token allotted",this);
     return resetToken;

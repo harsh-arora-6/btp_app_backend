@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const {secretKey} = require('../secret');
 const { sendMail } = require('../utility/nodemailer_user');
 
+
 module.exports.protectRoute = async function protectRoute(req,res,next){
     try {
         if(req.cookies.login_backend){
@@ -112,16 +113,16 @@ module.exports.forgetPassword = async function forgetPassword(req,res){
             //generate token
             const token = user.generateResetToken();
             // console.log("forget pass: ",user);
-            let link = `${req.protocol}://localhost:3000/auth/resetpassword/${token}`//front end route
+            
             let data = {
                 email:user.email,
-                resetLink:link
+                otp:token
             }
             await user.save();
             sendMail("forgetpassword",data);
             //mail this link.
             res.json({
-                message:"Reset Link sent to the specified mail"
+                message:"OTP sent to the specified mail"
             })
         }else{
             res.json({
@@ -137,8 +138,8 @@ module.exports.forgetPassword = async function forgetPassword(req,res){
 }
 module.exports.resetPassword = async function resetPassword(req,res){
     try {
-        let token = req.params.token;
-        let {password,confirmPassword} = req.body;
+    
+        let {token,password,confirmPassword} = req.body;
         const user = await userModel.findOne({resetToken:token});
         if(user){
             user.resetPasswordHandler(password,confirmPassword);
@@ -148,7 +149,7 @@ module.exports.resetPassword = async function resetPassword(req,res){
             })
         }else{
             res.json({
-                message:"Link Expired"
+                message:"OTP Expired"
             })
         }
     } catch (error) {

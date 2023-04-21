@@ -20,7 +20,7 @@ userRouter
 
 //reset password
 userRouter
-.route('/resetpassword/:token')
+.route('/resetpassword')
 .post(resetPassword)
 
 //logout

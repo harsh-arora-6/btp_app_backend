@@ -20,8 +20,8 @@ module.exports.sendMail = async function sendMail(text,data){
         email:${data.email}`
     }else{
         Osubject = "Reset Password";
-        Ohtml = `<h1>Reset your password using following link</h1>
-        Link: ${data.resetLink}`
+        Ohtml = `<h1>Reset your password using following otp</h1>
+        OTP: ${data.otp}`
     }
 
     let info = await transporter.sendMail({
