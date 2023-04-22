@@ -149,7 +149,7 @@ module.exports.resetPassword = async function resetPassword(req,res){
             })
         }else{
             res.json({
-                message:"OTP Expired"
+                message:"OTP Incorrect"
             })
         }
     } catch (error) {

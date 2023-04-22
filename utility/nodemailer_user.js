@@ -13,11 +13,8 @@ module.exports.sendMail = async function sendMail(text,data){
     var Osubject,Otext,Ohtml
     if(text == "signup"){
         Osubject = "Thank you for signing up!!!";
-        Ohtml = `<h1>Welcome to Food App</h1>
-        Hope you are having a good time!!
-        Your details are:-
-        Name: ${data.name}
-        email:${data.email}`
+        Ohtml = `<h1>Welcome to Distribution System Navigation App</h1>
+        Hope you are having a good time ${data.name}!!`
     }else{
         Osubject = "Reset Password";
         Ohtml = `<h1>Reset your password using following otp</h1>
