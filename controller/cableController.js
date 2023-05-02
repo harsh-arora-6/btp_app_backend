@@ -18,7 +18,7 @@ module.exports.getAllCables = async function getAllCables(req,res){
     try {
          let cable = await cableModel.findById(req.params.id);
         // send the current information to frontend.
-         if(cable.properties.code){
+         if(cable.properties && cable.properties.code){
             // add current magnitude in property
             cable.properties.phaseA_current = line_currents['I1'][cable.properties.code];
             cable.properties.phaseB_current = line_currents['I2'][cable.properties.code];
