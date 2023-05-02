@@ -38,6 +38,8 @@ Replace `<username>` and `<password>` with your MongoDB Atlas credentials. Repla
 
 4. Once you have connected to the MongoDB Atlas cluster, you can define your Mongoose schema and models and use them to interact with your data in the Atlas cluster.
 
+## Testing backend
+[ngrok](https://ngrok.com/docs/) or [localtunnel](https://theboroer.github.io/localtunnel-www/) can be used, just replace that url in the constants file in the frontend code.
 ## Security considerations
 
 To ensure the security of the backend API, please keep the following considerations in mind:
