@@ -3,7 +3,7 @@ const emailValidator = require('email-validator');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 // connecting database using mongoose
-const db_link = 'mongodb+srv://harsh_arora:7OBkLcwXLUbInIc0@cluster0.jfh4zpi.mongodb.net/?retryWrites=true&w=majority';// harsh_arora : <password> 
+const db_link = 'mongodb+srv://btpwork2023:RQGIXQJBl4uXxlM9@cluster0.suefava.mongodb.net/?retryWrites=true&w=majority';// harsh_arora : <password> 
 mongoose.connect(db_link)
 .then(function (db){
     // console.log(db);

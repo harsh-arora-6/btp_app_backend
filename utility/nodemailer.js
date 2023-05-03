@@ -8,8 +8,8 @@ module.exports.sendMail = async function sendMail(){
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: "harsharora614614@gmail.com", // generated ethereal user
-            pass: "pmoujttwsrtdanmc", // generated ethereal password
+            user: "btpwork2023@gmail.com", // generated ethereal user
+            pass: "fofysyqdnhttsvmh", // generated ethereal password
         },
     });
     let cables = await cableModel.find();

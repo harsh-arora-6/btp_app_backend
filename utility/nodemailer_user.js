@@ -6,8 +6,8 @@ module.exports.sendMail = async function sendMail(text,data){
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: "harsharora614614@gmail.com", // generated ethereal user
-            pass: "pmoujttwsrtdanmc", // generated ethereal password
+            user: "btpwork2023@gmail.com", // generated ethereal user
+            pass: "fofysyqdnhttsvmh", // generated ethereal password
         },
     });
     var Osubject,Otext,Ohtml
@@ -22,7 +22,7 @@ module.exports.sendMail = async function sendMail(text,data){
     }
 
     let info = await transporter.sendMail({
-        from: '"Test mail 👻" <harsharora614614@gmail.com>', // sender address
+        from: '"No Reply 👻" <btpwork2023@gmail.com>', // sender address
         to: data.email, // list of receivers
         subject: Osubject, // Subject line
         // text: "Hello world?", // plain text body
