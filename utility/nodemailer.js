@@ -26,7 +26,7 @@ module.exports.sendMail = async function sendMail(){
                 let {next_maintenance} = arr[i][j];
                 if(next_maintenance.getTime() < now){
                     await transporter.sendMail({
-                        from: '<harsharora614614@gmail.com>', // sender address
+                        from: '<btpwork2023@gmail.com>', // sender address
                         to: 'butterchiken123321@gmail.com', // list of receivers
                         subject: `Maintence Reminder for ${name} "${object.name}"`,
                         text: `The maintenance of ${name} "${object.name}" was due on ${next_maintenance.toDateString()} and has not been completed yet. Please take action to complete it as soon as possible.`
